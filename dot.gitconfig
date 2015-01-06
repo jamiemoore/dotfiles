@@ -18,3 +18,8 @@
     br = branch
     st = status
     who = shortlog -s --
+    email = config user.email 
+[url "git@github.com:"]
+    pushInsteadOf = git://github.com/
+    pushInsteadOf = https://github.com/
+
