@@ -1,0 +1,20 @@
+[user]
+	name = Jamie Moore
+	email = "(none)" 
+[core]
+	editor = vim
+[merge]
+	tool = vimdiff
+[color]
+	ui = true
+[credential]
+	helper = cache
+[push]
+    default = tracking
+[alias]
+    graph = log --graph --abbrev-commit --decorate --date=relative --all --pretty=format:'%C(bold yellow)%h%Creset -%C(yellow)%d%Creset %s %C(bold green)(%cr) %C(bold blue)<%an>%Creset'
+    ci = commit
+    co = checkout
+    br = branch
+    st = status
+    who = shortlog -s --
