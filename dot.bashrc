@@ -68,6 +68,9 @@ export PROMPT_COMMAND="history -a;${PROMPT_COMMAND}"
 ##############################################################################
 # ssh completion using the history 
 ##############################################################################
+if [[ ! -f ~/.bash_history ]]; then
+    touch ~/.bash_history
+fi
 complete -W "$(echo $(grep '^ssh ' ~/.bash_history | sort -u | sed 's/^ssh //'))" ssh
 
 ##############################################################################
