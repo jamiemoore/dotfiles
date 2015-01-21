@@ -90,8 +90,11 @@ let g:UltiSnipsListSnippets = '<f2>'
 let g:UltiSnipsEditSplit = 'horizontal'
 nmap <f2> :UltiSnipsEdit<CR>
 
-" Recognise .md as markdown not modula2
+" .md is markdown
 autocmd BufRead,BufNewFile *.md set filetype=markdown
+
+" .json is json 
+au! BufRead,BufNewFile *.json set filetype=json
 
 " Syntastic
 "let g:syntastic_html_checkers=['w3']
@@ -103,6 +106,7 @@ set laststatus=2
 " Tabstop differences based on filetype
 au FileType puppet setlocal ts=2 sw=2 sts=2 et
 au FileType yaml setlocal ts=2 sw=2 sts=2 et
+au FileType json setlocal ts=2 sw=2 sts=2 et
 
 " Gundo.  Requires Vim 7.3
 nnoremap <F5> :GundoToggle<CR>
