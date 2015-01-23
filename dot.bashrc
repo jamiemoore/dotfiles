@@ -133,6 +133,4 @@ function repeat {
         $CMD    
         sleep 1
     done
-
 }
-
