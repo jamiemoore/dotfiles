@@ -116,3 +116,23 @@ fi
 if [[ -f /usr/bin/virtualenvwrapper.sh ]]; then
     source /usr/bin/virtualenvwrapper.sh 
 fi
+
+
+##############################################################################
+# Repeat Function 
+##############################################################################
+function repeat {
+    CMD="${@}" 
+
+    if [[ -z "$CMD" ]]; then
+        echo "Requires a command as an argument"
+        return 1
+    fi
+    
+    while true; do
+        $CMD    
+        sleep 1
+    done
+
+}
+
