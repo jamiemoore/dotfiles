@@ -96,6 +96,9 @@ autocmd BufRead,BufNewFile *.md set filetype=markdown
 " .json is json 
 au! BufRead,BufNewFile *.json set filetype=json
 
+" html is html
+au! BufRead,BufNewFile *.html set filetype=html
+
 " Syntastic
 "let g:syntastic_html_checkers=['w3']
 
@@ -107,6 +110,7 @@ set laststatus=2
 au FileType puppet setlocal ts=2 sw=2 sts=2 et
 au FileType yaml setlocal ts=2 sw=2 sts=2 et
 au FileType json setlocal ts=2 sw=2 sts=2 et
+au FileType html setlocal ts=2 sw=2 sts=2 et
 
 " Gundo.  Requires Vim 7.3
 nnoremap <F5> :GundoToggle<CR>

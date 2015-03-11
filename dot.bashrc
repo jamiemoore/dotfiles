@@ -116,6 +116,7 @@ fi
 if [[ -f /usr/bin/virtualenvwrapper.sh ]]; then
     source /usr/bin/virtualenvwrapper.sh 
 fi
+export PROJECT_HOME="${HOME}/projects"
 
 
 ##############################################################################
@@ -134,3 +135,8 @@ function repeat {
         sleep 1
     done
 }
+
+##############################################################################
+# Vagrant 
+##############################################################################
+export VAGRANT_DEFAULT_PROVIDER=vmware_workstation

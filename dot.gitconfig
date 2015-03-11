@@ -10,7 +10,7 @@
 [credential]
 	helper = cache
 [push]
-    default = tracking
+	default = tracking
 [alias]
     graph = log --graph --abbrev-commit --decorate --date=relative --all --pretty=format:'%C(bold yellow)%h%Creset -%C(yellow)%d%Creset %s %C(bold green)(%cr) %C(bold blue)<%an>%Creset'
     ci = commit
