@@ -145,4 +145,4 @@ export VAGRANT_DEFAULT_PROVIDER=vmware_workstation
 # Go Development
 ##############################################################################
 export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin
