@@ -82,6 +82,11 @@ export GIT_PROMPT_LEADING_SPACE=0
 source ~/.bash-git-prompt/gitprompt.sh
 
 ##############################################################################
+# MySQL Prompt 
+##############################################################################
+export MYSQL_PS1=$(echo -e "\x1B[33mMySQL\x1B[0m \u@\h [\d]> ")
+
+##############################################################################
 # User Prompt Colour Selector - not a fan of this when combined with tmux
 ##############################################################################
 #if [[ "$DISPLAY" == *":0"* ]] ; then

@@ -1,0 +1,7 @@
+ControlPersist 1h
+
+Host *.*
+  ForwardAgent no
+
+Host *
+  ForwardAgent yes
