@@ -1,6 +1,5 @@
 [user]
 	name = Jamie Moore
-	email = "(none)" 
 [core]
 	editor = vim
 [merge]
@@ -8,7 +7,7 @@
 [color]
 	ui = true
 [credential]
-	helper = cache
+	helper = osxkeychain
 [push]
 	default = tracking
 [alias]
@@ -19,7 +18,10 @@
     st = status
     who = shortlog -s --
     email = config user.email 
+    origin = remote show origin
+    fdiff = diff --name-only
+    last = diff HEAD..HEAD~1
+    pull = pull --ff-only
 [url "git@github.com:"]
     pushInsteadOf = git://github.com/
     pushInsteadOf = https://github.com/
-

@@ -15,6 +15,11 @@ export TERM="screen-256color" #as above END key fails to work in vim
 alias tmux='tmux -2'
 
 ##############################################################################
+# Enable Coloured terminal commands on OS X
+##############################################################################
+export CLICOLOR=1
+
+##############################################################################
 # Standard Redhat Root Safety Aliases
 ##############################################################################
 alias rm='rm -i'
@@ -24,10 +29,10 @@ alias mv='mv -i'
 ##############################################################################
 # Standard Redhat Helpful Aliases
 ##############################################################################
-alias l.='ls --color -d .*'
-alias ll='ls --color -l'
+alias l.='ls -d .*'
+alias ll='ls -l'
 alias vi='vim'
-alias ls='ls --color'
+alias ls='ls '
 # Debian, she no like
 #alias which='alias | /usr/bin/which --tty-only --read-alias --show-dot --show-tilde'
 
@@ -38,9 +43,16 @@ alias ls='ls --color'
 alias ssh='TERM=screen ssh'
 
 ##############################################################################
+# macOS Sierra and adding to the keychain
+##############################################################################
+#ssh -K ~.ssh/id_rsa
+#This adds way too many keys, more than five keys causes authentication problems
+#ssh-add -A 2&> /dev/null
+
+##############################################################################
 # Automatically load ssh-agent and add keys (requires:keychain)
 ##############################################################################
-eval `keychain -q --timeout 720 --eval id_rsa`
+#eval `keychain -q --timeout 720 --eval id_rsa`
 
 ##############################################################################
 # Allows aliases to work with sudo, eg sudo ll
@@ -55,9 +67,17 @@ export EDITOR=vim
 ##############################################################################
 # Bash history size and duplicate options 
 ##############################################################################
-export HISTCONTROL=erasedups
-export HISTSIZE=10000
-export HISTFILESIZE=10000
+#export HISTCONTROL=erasedups
+export HISTCONTROL=ignoreboth
+export HISTSIZE=-1
+export HISTFILESIZE=-1
+
+##############################################################################
+# Bash Completion
+##############################################################################
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+fi
 
 ##############################################################################
 # Saves Bash History after each command
@@ -141,13 +161,152 @@ function repeat {
     done
 }
 
+
+##############################################################################
+# Get the SSH Password from the keychain
+##############################################################################
+#export SSHPASS=`security find-generic-password -w -s ssh_password`
+
+##############################################################################
+# Get a GITLAB token
+##############################################################################
+#export GITLAB_TOKEN=`security find-generic-password -w -s gitlab`
+
 ##############################################################################
 # Vagrant 
 ##############################################################################
-export VAGRANT_DEFAULT_PROVIDER=vmware_workstation
+#export VAGRANT_DEFAULT_PROVIDER=vmware_workstation
+export VAGRANT_DEFAULT_PROVIDER=virtualbox
 
 ##############################################################################
 # Go Development
 ##############################################################################
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin
+
+##############################################################################
+# Docker Machine
+##############################################################################
+#Note that we are using the DNS proxy for the Virtual Machine
+#if [[ `docker-machine status default` != "Running" ]]; then
+#    docker-machine start default
+#fi
+#export DMIP=`docker-machine inspect -f {{.Driver.IPAddress}} default`
+#export DMDNS=`docker-machine ssh default cat /etc/resolv.conf | cut -d ' ' -f 2`
+#eval "$(docker-machine env default)"
+
+##############################################################################
+# Docker auto completion and aliases
+##############################################################################
+
+if [ ! -f "${HOME}/.docker-completion.sh" ]; then
+    curl -L https://raw.githubusercontent.com/docker/docker/master/contrib/completion/bash/docker > ~/.docker-completion.sh
+fi
+
+if [ ! -f "${HOME}/.docker-compose-completion.sh" ]; then
+    curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose version --short)/contrib/completion/bash/docker-compose > ~/.docker-compose-completion.sh
+fi
+
+. ~/.docker-completion.sh
+#. ~/.docker-machine-completion.sh
+. ~/.docker-compose-completion.sh
+alias d=docker
+alias dc=docker-compose
+#alias dm=docker-machine
+complete -F _docker d
+#complete -F _docker_machine dm
+complete -F _docker_compose dc
+
+
+##############################################################################
+# Docker auto completion and aliases
+##############################################################################
+
+if [ ! -f "${HOME}/.kubectl-completion.sh" ]; then
+    kubectl completion bash > ~/.kubectl-completion.sh
+fi
+
+. ~/.kubectl-completion.sh
+
+alias k=kubectl
+alias mk=minikube
+
+_kubectl_completion k _kubectl
+
+#complete -F __start_kubectl k
+#complete -F _kubectl k
+
+
+minikube status 2> /dev/null | grep Running >/dev/null
+if [[ $? != 0 ]]; then
+    minikube start /dev/null
+fi
+
+
+
+##############################################################################
+# DNS for Docker
+##############################################################################
+
+#if [[ `docker inspect -f {{.State.Running}} dnsdock`  == "false" ]]; then
+#    docker rm dnsdock >& /dev/null
+#    docker inspect tonistiigi/dnsdock > /dev/null || docker pull tonistiigi/dnsdock 
+#    docker run -d --name dnsdock -v /var/run/docker.sock:/var/run/docker.sock -p 53:53 tonistiigi/dnsdock -nameserver=${DMDNS}:53 >& /dev/null
+#fi
+#export DNSDOCKIP=`docker inspect -f {{.NetworkSettings.IPAddress}} dnsdock`
+#export DNSDOCKNET=`echo $DNSDOCKIP | cut -d '.' -f 1,2`.0.0
+
+##############################################################################
+# Routes for Docker Containers 
+##############################################################################
+#route -n get $DNSDOCKNET | grep $DMIP >& /dev/null
+#if [[ $? != 0 ]]; then
+#    sudo route -n add -net $DNSDOCKNET $DMIP >& /dev/null
+#fi
+
+##############################################################################
+# Resolve the .docker domain from OS X 
+##############################################################################
+#if [[ ! -d "/etc/resolver" ]]; then
+#    sudo mkdir /etc/resolver
+#fi
+
+#grep $DNSDOCKIP /etc/resolver/docker >& /dev/null
+#if [[ $? != 0 ]]; then
+#    sudo sh -c "echo nameserver $DNSDOCKIP > /etc/resolver/docker"
+#fi
+
+##############################################################################
+# Autojump
+##############################################################################
+[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
+
+##############################################################################
+# Passwordless login when password required
+##############################################################################
+
+export NOPASSWORDDOMAIN="nopasswd.local"
+
+function ssh {
+
+    if [[ "$@" == *"$NOPASSWORDDOMAIN"* ]]
+	then
+        sshpass -e /usr/bin/ssh "$@"
+	else
+		/usr/bin/ssh "$@"
+	fi
+
+}
+
+##############################################################################
+# Ansible
+##############################################################################
+export ANSIBLE_HOST_KEY_CHECKING=False
+
+##############################################################################
+# Typora
+##############################################################################
+alias typora="open -a typora"
+alias t="open -a typora"
+alias ack="ack -i"
+

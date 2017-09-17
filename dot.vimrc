@@ -111,6 +111,8 @@ au FileType puppet setlocal ts=2 sw=2 sts=2 et
 au FileType yaml setlocal ts=2 sw=2 sts=2 et
 au FileType json setlocal ts=2 sw=2 sts=2 et
 au FileType html setlocal ts=2 sw=2 sts=2 et
+au FileType javascript setlocal ts=2 sw=2 sts=2 et
+au FileType jsx setlocal ts=2 sw=2 sts=2 et
 
 " Gundo.  Requires Vim 7.3
 nnoremap <F5> :GundoToggle<CR>
