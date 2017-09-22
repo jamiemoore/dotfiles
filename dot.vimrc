@@ -6,7 +6,7 @@ let mapleader=','
 " Check the leader is working by using ,t
 nnoremap <leader>t :echo("\<leader\> works! It is set to <leader>")<CR>
 
-" Enable pathogen for easy plugin management 
+" Enable pathogen for easy plugin management
 call pathogen#infect()
 
 set title
@@ -63,7 +63,7 @@ set noswapfile "Don't create .swp files
 nnoremap <space> za
 vnoremap <space> zf
 
-" paste mode toggle 
+" paste mode toggle
 nnoremap <F3> :set invpaste<CR>
 set pastetoggle=<F3>
 
@@ -82,10 +82,10 @@ set pastetoggle=<F3>
 " Change parenthesis highlighting
 :hi MatchParen cterm=underline ctermbg=none ctermfg=none
 
-" UltiSnips 
-let g:UltiSnipsExpandTrigger="<tab>"                                            
-let g:UltiSnipsJumpForwardTrigger="<tab>"                                       
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>" 
+" UltiSnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsListSnippets = '<f2>'
 let g:UltiSnipsEditSplit = 'horizontal'
 nmap <f2> :UltiSnipsEdit<CR>
@@ -93,11 +93,14 @@ nmap <f2> :UltiSnipsEdit<CR>
 " .md is markdown
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 
-" .json is json 
+" .json is json
 au! BufRead,BufNewFile *.json set filetype=json
 
 " html is html
 au! BufRead,BufNewFile *.html set filetype=html
+
+" yml is yaml
+" au! BufRead,BufNewFile *.yml set filetype=yaml
 
 " Syntastic
 "let g:syntastic_html_checkers=['w3']
@@ -107,12 +110,20 @@ set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 set laststatus=2
 
 " Tabstop differences based on filetype
+au FileType snippets setlocal ts=2 sw=2 sts=0 noexpandtab
 au FileType puppet setlocal ts=2 sw=2 sts=2 et
+au FileType python setlocal ts=4 sw=4 sts=4 et
 au FileType yaml setlocal ts=2 sw=2 sts=2 et
 au FileType json setlocal ts=2 sw=2 sts=2 et
 au FileType html setlocal ts=2 sw=2 sts=2 et
 au FileType javascript setlocal ts=2 sw=2 sts=2 et
 au FileType jsx setlocal ts=2 sw=2 sts=2 et
+au FileType tf setlocal ts=2 sw=2 sts=2 et
+
+" Show special characters
+"":set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+:set listchars=tab:>·,trail:~,extends:>,precedes:<
+:set list
 
 " Gundo.  Requires Vim 7.3
 nnoremap <F5> :GundoToggle<CR>
@@ -130,8 +141,8 @@ map <C-n> :NERDTreeToggle<CR>
 let NERDTreeQuitOnOpen=1
 
 "neocomplcache
-" Launches neocomplcache automatically on vim startup. 
-"let g:neocomplcache_enable_at_startup = 1 
+" Launches neocomplcache automatically on vim startup.
+"let g:neocomplcache_enable_at_startup = 1
 "
 " inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " let g:neocomplcache_enable_auto_select = 1
@@ -144,3 +155,9 @@ let g:syntastic_puppet_puppetlint_args = '--no-80chars-check --no-class_inherits
 " Add : to the word boundry, for those class::seperators
 set iskeyword-=:
 
+"Format terraform files on save
+"let g:terraform_fmt_on_save=1
+let g:terraform_align=1
+
+"Automatically remote any trailing writespace on save
+"autocmd BufWritePre * %s/\s\+$//e

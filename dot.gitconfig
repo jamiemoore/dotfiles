@@ -4,24 +4,29 @@
 	editor = vim
 [merge]
 	tool = vimdiff
+	ff = only
 [color]
 	ui = true
 [credential]
 	helper = osxkeychain
 [push]
-	default = tracking
+	default = simple
 [alias]
     graph = log --graph --abbrev-commit --decorate --date=relative --all --pretty=format:'%C(bold yellow)%h%Creset -%C(yellow)%d%Creset %s %C(bold green)(%cr) %C(bold blue)<%an>%Creset'
     ci = commit
     co = checkout
-    br = branch
+    br = branch -vv
     st = status
     who = shortlog -s --
-    email = config user.email 
+    email = config user.email
     origin = remote show origin
     fdiff = diff --name-only
     last = diff HEAD..HEAD~1
-    pull = pull --ff-only
+    puff = pull --ff-only
+    pull = pull --rebase=preserve
+    prb = pull --rebase
+    rem = remote -v
+
 [url "git@github.com:"]
     pushInsteadOf = git://github.com/
     pushInsteadOf = https://github.com/
