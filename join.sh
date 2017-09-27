@@ -24,8 +24,8 @@ if [[ -f $SCRIPTDIR/dot.bashrc.custom ]]; then
 fi
 
 
-if [[ -f /Users ]]; then
-    ln -fs $SCRIPTDIR/dot.bashrc ~/.bashrc.mac
+if [[ -d /Users ]]; then
+    ln -fs $SCRIPTDIR/dot.bashrc.mac ~/.bashrc
 else
     ln -fs $SCRIPTDIR/dot.bashrc ~/.bashrc
 fi

@@ -1,6 +1,5 @@
 [user]
 	name = Jamie Moore
-	email = 
 [core]
 	editor = vim
 [merge]
@@ -14,7 +13,6 @@
 	default = simple
 [alias]
     graph = log --graph --abbrev-commit --decorate --date=relative --all --pretty=format:'%C(bold yellow)%h%Creset -%C(yellow)%d%Creset %s %C(bold green)(%cr) %C(bold blue)<%an>%Creset'
-    ci = commit
     co = checkout
     br = branch -vv
     st = status
@@ -27,7 +25,6 @@
     pull = pull --rebase=preserve
     prb = pull --rebase
     rem = remote -v
-
 [url "git@github.com:"]
     pushInsteadOf = git://github.com/
     pushInsteadOf = https://github.com/
