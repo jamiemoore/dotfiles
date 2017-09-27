@@ -1,5 +1,6 @@
 [user]
 	name = Jamie Moore
+	email = 
 [core]
 	editor = vim
 [merge]
@@ -30,3 +31,8 @@
 [url "git@github.com:"]
     pushInsteadOf = git://github.com/
     pushInsteadOf = https://github.com/
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
