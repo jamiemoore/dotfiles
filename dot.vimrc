@@ -159,5 +159,5 @@ set iskeyword-=:
 "let g:terraform_fmt_on_save=1
 let g:terraform_align=1
 
-"Automatically remote any trailing writespace on save
-"autocmd BufWritePre * %s/\s\+$//e
+"Automatically remove any trailing writespace on save
+autocmd BufWritePre * %s/\s\+$//e
