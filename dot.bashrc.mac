@@ -5,7 +5,26 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-# User specific aliases and functions
+#Source custom definitions
+if [ -f .customrc ]; then
+	. .customrc
+fi
+
+##############################################################################
+# Homebrew Python
+##############################################################################
+if [ -d $(brew --prefix)/opt/python/libexec/bin ]; then
+    export PATH=$(brew --prefix)/opt/python/libexec/bin:$PATH
+fi
+
+
+##############################################################################
+# Home Bin Directory
+##############################################################################
+if [ -d $HOME/bin ]; then
+    export PATH=$HOME/bin:$PATH
+fi
+
 ##############################################################################
 # Configure a 256 Colour Terminal
 ##############################################################################
@@ -97,7 +116,8 @@ complete -W "$(echo $(grep '^ssh ' ~/.bash_history | sort -u | sed 's/^ssh //'))
 ##############################################################################
 # git prompt
 ##############################################################################
-export GIT_PROMPT_START="[\$http_proxy][\$AWS_PROFILE][\u@\h \W]"
+export GIT_PROMPT_START="[\`echo \$http_proxy | cut -c1-5\`][\$AWS_PROFILE][\u@ \W]"
+#export GIT_PROMPT_START="[\$http_proxy][\$AWS_PROFILE][\u@\h \W]"
 export GIT_PROMPT_END="\$"
 export GIT_PROMPT_LEADING_SPACE=0
 source ~/.bash-git-prompt/gitprompt.sh
@@ -201,7 +221,7 @@ export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin
 ##############################################################################
 
 if [ ! -f "${HOME}/.docker-completion.sh" ]; then
-    curl -L https://raw.githubusercontent.com/docker/docker/master/contrib/completion/bash/docker > ~/.docker-completion.sh
+    curl -L https://raw.githubusercontent.com/docker/cli/master/contrib/completion/bash/docker > ~/.docker-completion.sh
 fi
 
 if [ ! -f "${HOME}/.docker-compose-completion.sh" ]; then
@@ -223,27 +243,25 @@ complete -F _docker_compose dc
 # Docker auto completion and aliases
 ##############################################################################
 
-if [ ! -f "${HOME}/.kubectl-completion.sh" ]; then
-    kubectl completion bash > ~/.kubectl-completion.sh
-fi
+#if [ ! -f "${HOME}/.kubectl-completion.sh" ]; then
+#    kubectl completion bash > ~/.kubectl-completion.sh
+#fi
 
-. ~/.kubectl-completion.sh
+#. ~/.kubectl-completion.sh
 
-alias k=kubectl
-alias mk=minikube
+#alias k=kubectl
+#alias mk=minikube
 
-_kubectl_completion k _kubectl
+#_kubectl_completion k _kubectl
 
 #complete -F __start_kubectl k
 #complete -F _kubectl k
 
 
-minikube status 2> /dev/null | grep Running >/dev/null
+#minikube status 2> /dev/null | grep Running >/dev/null
 #if [[ $? != 0 ]]; then
     #minikube start /dev/null
 #fi
-
-
 
 ##############################################################################
 # DNS for Docker
@@ -324,4 +342,11 @@ complete -C aws_completer aws
 ##############################################################################
 # Custom
 ##############################################################################
-source ~/.customrc
+#source ~/.customrc
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[ -f /Users/p759491/.homebrew/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /Users/p759491/.homebrew/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[ -f /Users/p759491/.homebrew/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /Users/p759491/.homebrew/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash
