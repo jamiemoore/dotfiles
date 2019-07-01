@@ -42,6 +42,9 @@ colorscheme hybrid
 "colorscheme jellybeans
 "colorscheme base16-default
 
+"Set the background colour to be the same as the terminal
+highlight Normal ctermbg=black
+
 " CtrlP
 let g:ctrlp_map = '<c-p>'
 "let g:ctrlp_cmd = 'CtrlP'
@@ -161,3 +164,10 @@ let g:terraform_align=1
 
 "Automatically remove any trailing writespace on save
 autocmd BufWritePre * %s/\s\+$//e
+
+"lightline - remove the colour from the bar
+let g:lightline = { 'colorscheme': 'powerline' }
+let s:palette = g:lightline#colorscheme#{g:lightline.colorscheme}#palette
+let s:palette.normal.middle = [ [ 'NONE', 'NONE', 'NONE', 'NONE' ] ]
+let s:palette.inactive.middle = s:palette.normal.middle
+let s:palette.tabline.middle = s:palette.normal.middle
