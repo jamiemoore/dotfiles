@@ -116,7 +116,8 @@ complete -W "$(echo $(grep '^ssh ' ~/.bash_history | sort -u | sed 's/^ssh //'))
 ##############################################################################
 # git prompt
 ##############################################################################
-export GIT_PROMPT_START="[\`echo \$http_proxy | cut -c1-4\`][\`echo \$AWS_PROFILE | cut -c1-9\`][\`kubectl config current-context 2> /dev/null | cut -f 1 -d . | cut -f 1 -d -\`][\u@ \W]"
+#export GIT_PROMPT_START="[\`echo \$http_proxy | cut -c1-4\`][\`echo \$AWS_PROFILE | cut -c1-9\`][\`kubectl config current-context 2> /dev/null | cut -f 1 -d . | cut -f 1 -d -\`][\u@ \W]"
+export GIT_PROMPT_START="[\`echo \$http_proxy | cut -c1-4\`][\`echo \$AWS_PROFILE | cut -c1-9\`][\`kubectl config current-context 2> /dev/null | cut -f 1 -d . | cut -f 1 -d -\`][\`whoami | tail -c 6\`@ \W]"
 #export GIT_PROMPT_START="[\$http_proxy][\$AWS_PROFILE][\u@\h \W]"
 export GIT_PROMPT_END="\$"
 export GIT_PROMPT_LEADING_SPACE=0
@@ -351,22 +352,34 @@ complete -o default -o nospace -F __start_awless a
 ##############################################################################
 # Istio
 ##############################################################################
-export PATH="$PATH:/Users/me801298/bin/istio-1.0.6/bin"
+export PATH="$PATH:$HOME/bin/istio-1.0.6/bin"
 
+
+##############################################################################
+# aws-vault
+##############################################################################
+export AWS_VAULT_KEYCHAIN_NAME=login
+export AWS_VAULT_PROMPT=osascript
+#export AWS_ASSUME_ROLE_TTL=12h
+#export AWS_SESSION_TTL=12h
+#export AWS_FEDERATION_TOKEN_TTL=12h
+export AWS_ASSUME_ROLE_TTL=1h
+export AWS_SESSION_TTL=1h
+export AWS_FEDERATION_TOKEN_TTL=1h
 
 ##############################################################################
 #  Easy sed function
 ##############################################################################
 #find . -type f -not -path './.git/*' -exec sed -i '' 's/esm-m/esm-g/g' {} \;
 
+
+##############################################################################
+#  direnv
+##############################################################################
+eval "$(direnv hook bash)"
+
 ##############################################################################
 # Custom
 ##############################################################################
-#source ~/.customrc
+source ~/.customrc
 
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[ -f /Users/p759491/.homebrew/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /Users/p759491/.homebrew/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[ -f /Users/p759491/.homebrew/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /Users/p759491/.homebrew/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash

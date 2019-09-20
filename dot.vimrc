@@ -31,7 +31,7 @@ syntax on
 
 " ColourScheme
 " Setting set t_Co=256 causes highlighting not to show
-" set t_Co=256
+"set t_Co=256
 
 set background=dark
 
@@ -41,6 +41,7 @@ let g:hybrid_use_Xresources = 1
 colorscheme hybrid
 "colorscheme jellybeans
 "colorscheme base16-default
+"colorscheme base16-default-dark
 
 "Set the background colour to be the same as the terminal
 highlight Normal ctermbg=black
