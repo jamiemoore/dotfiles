@@ -1,20 +1,30 @@
 [user]
 	name = Jamie Moore
 [core]
-	editor = vim
+	editor = code --wait
+    pager = cat
 [merge]
-	tool = vimdiff
-	ff = only
+    tool = vscode
+	ff = false
+[mergetool "vscode"]
+    cmd = code --wait $MERGED
+[diff]
+    tool = vscode
+[difftool "vscode"]
+    cmd = code --wait --diff $LOCAL $REMOTE
 [color]
 	ui = true
 [credential]
 	helper = osxkeychain
 [push]
-	default = simple
+    default = simple
+[pull]
+	rebase = merges
 [alias]
     graph = log --graph --abbrev-commit --decorate --date=relative --all --pretty=format:'%C(bold yellow)%h%Creset -%C(yellow)%d%Creset %s %C(bold green)(%cr) %C(bold blue)<%an>%Creset'
+    gb = log --abbrev-commit --date=relative --pretty=oneline
     co = checkout
-    br = branch -vv
+    bra = branch -a -vv
     st = status
     who = shortlog -s --
     email = config user.email
@@ -23,8 +33,6 @@
     fdiff = diff --name-only
     last = diff HEAD..HEAD~1
     puff = pull --ff-only
-    pull = pull --rebase=preserve
-    prb = pull --rebase
     rem = remote -v
 [url "git@github.com:"]
     pushInsteadOf = git://github.com/
@@ -36,3 +44,5 @@
     process = git-lfs filter-process
 [commit]
 #	gpgSign = true
+[pager]
+#	branch = false

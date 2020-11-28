@@ -3,7 +3,6 @@
 ##############################################################################
 export PATH=/usr/local/opt/curl/bin:$HOME/bin:/usr/local/bin:$PATH
 
-
 ##############################################################################
 # Autocomplete
 ##############################################################################
@@ -22,6 +21,22 @@ fi
 
 # Remove % from lines without newline
 unsetopt PROMPT_CR PROMPT_SP
+# Return unmatched glob as glob
+setopt nonomatch
+
+
+##############################################################################
+# direnv
+##############################################################################
+eval "$(direnv hook zsh)"
+# This turns off the output to stdout
+export DIRENV_LOG_FORMAT=
+
+
+##############################################################################
+# Don't display the highlighted % for partial lines
+##############################################################################
+PROMPT_EOL_MARK=''
 
 ##############################################################################
 # oh-my-zsh
@@ -31,7 +46,7 @@ unsetopt PROMPT_CR PROMPT_SP
 export ZSH="${HOME}/.oh-my-zsh"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="false"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -39,7 +54,7 @@ COMPLETION_WAITING_DOTS="true"
 ##############################################################################
 # zsh theme: powerlevel9k
 ##############################################################################
-ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 ##############################################################################
 # function: get aws-vault server mode based on process
@@ -69,6 +84,10 @@ POWERLEVEL9K_CUSTOM_AWSVAULT=get_awsvault_server
 POWERLEVEL9K_CUSTOM_AWSVAULT_FOREGROUND="black"
 POWERLEVEL9K_CUSTOM_AWSVAULT_BACKGROUND="014"
 
+#POWERLEVEL9K_AWS=get_awsvault_server
+POWERLEVEL9K_AWS_FOREGROUND="black"
+POWERLEVEL9K_AWS_BACKGROUND="014"
+
 POWERLEVEL9K_CUSTOM_KUBE=get_kube_info
 POWERLEVEL9K_CUSTOM_KUBE_FOREGROUND="black"
 POWERLEVEL9K_CUSTOM_KUBE_BACKGROUND="blue"
@@ -79,8 +98,12 @@ POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 POWERLEVEL9K_SHORTEN_STRATEGY=truncate_folders
 POWERLEVEL9K_DISABLE_RPROMPT=true
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir custom_awsvault custom_kube vcs)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir anaconda aws custom_awsvault custom_kube vcs)
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+
+POWERLEVEL9K_DIR_HOME_BACKGROUND="green"
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="green"
+POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="green"
 
 ##############################################################################
 # oh my zsh: plugins
@@ -121,7 +144,7 @@ export AWS_FEDERATION_TOKEN_TTL=12h
 ##############################################################################
 # kubectl
 ##############################################################################
-export KUBECONFIG=${HOME}/.kube/poc
+export KUBECONFIG=${HOME}/.kube/config:${HOME}/.kube/openshift
 alias kctx="kubectx"
 alias kns="kubens"
 
@@ -137,7 +160,7 @@ alias t="open -a typora"
 alias ack="ack -i"
 
 ##############################################################################
-# custom
+# chamber
 ##############################################################################
 export CHAMBER_KMS_KEY_ALIAS="alias/terraform"
 
@@ -145,3 +168,70 @@ export CHAMBER_KMS_KEY_ALIAS="alias/terraform"
 # homebrew curl
 ##############################################################################
 export PATH=/usr/local/opt/curl/bin:$PATH
+
+##############################################################################
+# AWS Less
+##############################################################################
+source <(awless completion zsh)
+
+##############################################################################
+# Ruby
+##############################################################################
+eval "$(rbenv init -)"
+
+##############################################################################
+# Node
+##############################################################################
+eval "$(nodenv init -)"
+
+##############################################################################
+# Android
+##############################################################################
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+
+##############################################################################
+# Java
+##############################################################################
+export JAVA_HOME=$(/usr/libexec/java_home)
+export JAVA_8_HOME=$(/usr/libexec/java_home -v1.8)
+alias java8='export JAVA_HOME=$JAVA_8_HOME'
+# Lets set to 8 and see how we go
+export JAVA_HOME=$JAVA_8_HOME
+
+##############################################################################
+# Android
+##############################################################################
+# Setting ANDROID_SDK for android-sdk
+export ANDROID_SDK="/Users/$(whoami)/Library/Android/sdk"
+# Setting PATH to ANDROID_SDK emulator
+export PATH="$PATH:${ANDROID_SDK}/emulator"
+# Setting PATH to ANDROID_SDK platform tools
+export PATH="$PATH:${ANDROID_SDK}/platform-tools"
+
+##############################################################################
+# azure
+##############################################################################
+auth () { aws-azure-login -p $1 --no-prompt ; export AWS_PROFILE=$1 }
+auth-prompt () { DEBUG=aws-azure-login aws-azure-login -p $1 ; export AWS_PROFILE=$1 }
+# DEBUG=aws-azure-login aws-azure-login -p shared --no-prompt
+
+##############################################################################
+# netstat
+##############################################################################
+netstat () {lsof -nP -iTCP | grep LISTEN}
+
+##############################################################################
+# UTC Date
+##############################################################################
+udate () { gdate -u --date=@$(gdate +%s --date="$*") "+%Y-%m-%d %H:%M:%S" }
+us3date () { gdate -u --date=@$(gdate +%s --date="$*") "+%Y-%m-%d:%H:%M:%S" }
+
+
+##############################################################################
+# golang
+##############################################################################
+export GOPATH="${HOME}/.go"
+export GOROOT="$(brew --prefix golang)/libexec"
+export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+test -d "${GOPATH}" || mkdir "${GOPATH}"
+test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"

@@ -1,11 +1,9 @@
-
 ControlPersist 1h
 
-#Host *.*
-#  ForwardAgent no
-
 Host *
+  ForwardAgent no
   IdentityFile ~/.ssh/id_rsa
-  ForwardAgent yes
   UseKeychain yes
   AddKeysToAgent yes
+
+Include config.d/*
