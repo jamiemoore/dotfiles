@@ -11,9 +11,9 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 ##############################################################################
 # homebrew python
 ##############################################################################
-if [ -d $(brew --prefix)/opt/python/libexec/bin ]; then
-    export PATH=$(brew --prefix)/opt/python/libexec/bin:$PATH
-fi
+# if [ -d $(brew --prefix)/opt/python/libexec/bin ]; then
+#     export PATH=$(brew --prefix)/opt/python/libexec/bin:$PATH
+# fi
 
 ##############################################################################
 # shell options
@@ -185,6 +185,12 @@ eval "$(rbenv init -)"
 eval "$(nodenv init -)"
 
 ##############################################################################
+# Python
+##############################################################################
+eval "$(pyenv init -)"
+export PATH="$PATH:/Users/jamie/.local/bin"
+
+##############################################################################
 # Android
 ##############################################################################
 export ANDROID_HOME="$HOME/Library/Android/sdk"
@@ -225,7 +231,6 @@ netstat () {lsof -nP -iTCP | grep LISTEN}
 ##############################################################################
 udate () { gdate -u --date=@$(gdate +%s --date="$*") "+%Y-%m-%d %H:%M:%S" }
 us3date () { gdate -u --date=@$(gdate +%s --date="$*") "+%Y-%m-%d:%H:%M:%S" }
-
 
 ##############################################################################
 # golang
