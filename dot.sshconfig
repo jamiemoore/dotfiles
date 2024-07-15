@@ -1,9 +1,0 @@
-ControlPersist 1h
-
-Host *
-  ForwardAgent no
-  IdentityFile ~/.ssh/id_rsa
-  UseKeychain yes
-  AddKeysToAgent yes
-
-Include config.d/*
