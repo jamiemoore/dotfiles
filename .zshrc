@@ -20,8 +20,8 @@ PROMPT_EOL_MARK=
 ################################################################################
 # Homebrew
 ################################################################################
-eval "$(/opt/homebrew/bin/brew shellenv)"
 export HOMEBREW=$(brew --prefix)
+eval "$($HOMEBREW/bin/brew shellenv)"
 
 ################################################################################
 # Homebrew Path Changes
@@ -180,7 +180,7 @@ eval "$(fzf --zsh)"
 ##############################################################################
 # Autojump
 ##############################################################################
-[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+[ -f $HOMEBREW/etc/profile.d/autojump.sh ] && source $HOMEBREW/etc/profile.d/autojump.sh
 
 ##############################################################################
 # Mise
@@ -226,4 +226,4 @@ PROMPT='%1d%F{green}$(virtualenv_info)%f%F{blue}${vcs_info_msg_0_}%f%F{red}$(pro
 ##############################################################################
 # Custom
 ##############################################################################
-source ~/.zshrc.custom
+[ -f ~/.zshrc.custom ] && source ~/.zshrc.custom 
