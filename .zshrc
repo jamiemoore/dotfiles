@@ -21,11 +21,12 @@ PROMPT_EOL_MARK=
 # Homebrew
 ################################################################################
 eval "$(/opt/homebrew/bin/brew shellenv)"
+export HOMEBREW=$(brew --prefix)
 
 ################################################################################
 # Homebrew Path Changes
 ################################################################################
-export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+export PATH="$HOMEBREW/opt/mysql-client/bin:$PATH"
 
 ################################################################################
 # Set Default Editor
@@ -102,7 +103,7 @@ export CHAMBER_KMS_KEY_ALIAS="alias/terraform"
 ##############################################################################
 # homebrew curl
 ##############################################################################
-export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+export PATH="$HOMEBREW/opt/curl/bin:$PATH"
 
 ##############################################################################
 # Android
