@@ -142,7 +142,9 @@ export PATH=$GOPATH/bin:$PATH
 # Colima
 ##############################################################################
 # Some apps ignore docker context and use DOCKER_HOST when using colima
-export DOCKER_HOST=unix://"$HOME/.colima/default/docker.sock"
+[ -f ~/.zshrc.colima ] && source ~/.zshrc.colima || true
+
+
 
 ##############################################################################
 # Switch a proxy on and off
