@@ -34,8 +34,14 @@ setopt HIST_IGNORE_ALL_DUPS
 # Don't record an entry starting with a space.
 setopt HIST_IGNORE_SPACE
 
+# Cache fzf shell integration
+if [[ ! -f ~/.cache/fzf.zsh ]] || [[ ! -s ~/.cache/fzf.zsh ]]; then
+    mkdir -p ~/.cache
+    fzf --zsh > ~/.cache/fzf.zsh
+fi
+
 # Fuzzy search history with ctrl-r and fuzzy file open with ctrl-t
-eval "$(fzf --zsh)"
+source ~/.cache/fzf.zsh
 
 # Return unmatched glob as glob
 setopt nonomatch
