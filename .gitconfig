@@ -17,7 +17,7 @@
 [credential]
 	helper = osxkeychain
 [push]
-    default = simple
+    default = simple # use current if you want to automatically create the current branch on the remote
 [pull]
 	rebase = merges
 [alias]
@@ -27,8 +27,10 @@
     bra = branch -a -vv
     st = status
     who = shortlog -s --
-    email = config user.email
-    sign = config user.signingKey
+    email = config --local user.email
+    sign = "!f() { git config --local user.signingkey $(gpg --list-secret-keys --keyid-format=long | awk '/^sec|^uid/ { if ($1 == \"sec\") keyAndDate = substr($2, index($2, \"/\")+1) \" [\" $3 \"]\"; if ($1 == \"uid\") print keyAndDate \" \" substr($NF, 2, length($NF)-2) }' | fzf | cut -d\" \" -f1); }; f"
+
+
     origin = remote show origin
     fdiff = diff --name-only
     last = diff HEAD..HEAD~1
@@ -43,8 +45,10 @@
 	smudge = git-lfs smudge -- %f
     process = git-lfs filter-process
 [commit]
-#	gpgSign = true
+	gpgSign = true
 [pager]
 #	branch = false
 [init]
 	defaultBranch = master
+[rebase]
+	autoStash = true
