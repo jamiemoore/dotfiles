@@ -47,7 +47,5 @@ source ~/.cache/fzf.zsh
 setopt nonomatch
 # Remove % from lines without newline
 unsetopt PROMPT_CR PROMPT_SP
-# Don't display the highlighted % for partial line=
-
-export EDITOR="code"
-export VISUAL="code"
+# Don't display the highlighted % for partial line
+PROMPT_EOL_MARK=

@@ -1,3 +1,9 @@
+##############################################################################
+# colima
+##############################################################################
+# If colima is adding lines to your ssh file
+# run colima template and set sshConfig: false
+
 # Docker safe start function for Colima
 docker_safe_start() {
     # Check if we're on macOS
@@ -13,7 +19,7 @@ docker_safe_start() {
     # Check Colima status
     if ! colima status 2>/dev/null; then
         echo "Colima is not running. Starting Colima..."
-        colima start
+        colima start --ssh-config=false
     fi
 
     # Check Docker socket

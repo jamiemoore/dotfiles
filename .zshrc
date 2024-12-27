@@ -34,6 +34,7 @@ sourcey ~/.zsh/kube.zsh
 sourcey ~/.zsh/colima.zsh
 sourcey ~/.zsh/typora.zsh
 sourcey ~/.zsh/prompt.zsh
+sourcey ~/.zsh/editor.zsh
 
 [ -f ~/.local.zsh ] && sourcey ~/.local.zsh || true
 
