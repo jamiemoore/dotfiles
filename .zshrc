@@ -19,6 +19,7 @@ sourcey ~/.zsh/shell.zsh
 sourcey ~/.zsh/tmux.zsh
 sourcey ~/.zsh/brew.zsh
 sourcey ~/.zsh/pipx.zsh
+sourcey ~/.zsh/aws.zsh
 sourcey ~/.zsh/ack.zsh
 # sourcey ~/.zsh/android.zsh
 sourcey ~/.zsh/autojump.zsh
