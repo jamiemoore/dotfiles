@@ -5,9 +5,14 @@
 # remove duplicates from fpath
 fpath=($(printf "%s\n" "${fpath[@]}" | awk '!seen[$0]++'))
 
+
 # Autocomplete Settings
 autoload -Uz compaudit
 autoload -Uz compinit
+
+#Fix permissions on any shared directories with other users
+compaudit | xargs chmod g-w o-w
+
 # only compile completions if the dump file is missing or older than 24 hours
 if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
     compinit

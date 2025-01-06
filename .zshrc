@@ -1,8 +1,10 @@
 # zmodload zsh/zprof
 zmodload zsh/datetime
 
-readonly SHOW_TIMING=false
-readonly SHOW_TIMING_THRESHOLD=5
+if ! readonly | grep -q SHOW_TIMING; then
+    readonly SHOW_TIMING=true
+    readonly SHOW_TIMING_THRESHOLD=5
+fi
 
 # Array to store timing data
 typeset -A timing_data
@@ -15,9 +17,8 @@ function sourcey() {
     timing_data[$1]=$((end-start))
 }
 
-sourcey ~/.zsh/shell.zsh
-sourcey ~/.zsh/tmux.zsh
 sourcey ~/.zsh/brew.zsh
+sourcey ~/.zsh/shell.zsh
 sourcey ~/.zsh/pipx.zsh
 sourcey ~/.zsh/aws.zsh
 sourcey ~/.zsh/ack.zsh
@@ -36,6 +37,7 @@ sourcey ~/.zsh/colima.zsh
 sourcey ~/.zsh/typora.zsh
 sourcey ~/.zsh/prompt.zsh
 sourcey ~/.zsh/editor.zsh
+sourcey ~/.zsh/tmux.zsh
 
 [ -f ~/.local.zsh ] && sourcey ~/.local.zsh || true
 

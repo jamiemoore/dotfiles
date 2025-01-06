@@ -2,6 +2,11 @@
 # Homebrew
 ################################################################################
 
+#Set the path only if the directory exists as brew may be in /usr/local/bin
+if [[ -d /opt/homebrew/bin ]]; then
+    export PATH="/opt/homebrew/bin:$PATH"
+fi
+
 # Cache the Homebrew prefix
 if [[ ! -f ~/.cache/brew_prefix ]]; then
     mkdir -p ~/.cache
