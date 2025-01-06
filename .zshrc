@@ -24,7 +24,7 @@ sourcey ~/.zsh/aws.zsh
 sourcey ~/.zsh/ack.zsh
 # sourcey ~/.zsh/android.zsh
 sourcey ~/.zsh/autojump.zsh
-sourcey ~/.zsh/azure.zsh
+# sourcey ~/.zsh/azure.zsh
 sourcey ~/.zsh/certs.zsh
 sourcey ~/.zsh/curl.zsh
 # sourcey ~/.zsh/golang.zsh
