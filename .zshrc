@@ -2,7 +2,7 @@
 zmodload zsh/datetime
 
 if ! readonly | grep -q SHOW_TIMING; then
-    readonly SHOW_TIMING=true
+    readonly SHOW_TIMING=false
     readonly SHOW_TIMING_THRESHOLD=5
 fi
 
