@@ -40,6 +40,7 @@ sourcey ~/.zsh/editor.zsh
 sourcey ~/.zsh/tmux.zsh
 
 [ -f ~/.local.zsh ] && sourcey ~/.local.zsh || true
+[ -f ~/.zshrc.custom ] && sourcey ~/.zshrc.custom || true
 
 if [[ "$SHOW_TIMING" == "true" ]]; then
     print -l ${(k)timing_data} | \
