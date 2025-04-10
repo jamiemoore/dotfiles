@@ -1,5 +1,6 @@
 [user]
 	name = Jamie Moore
+	useConfigOnly = true # Git will not guess your name and email
 [core]
 	editor = code --wait
     pager = cat
@@ -27,7 +28,7 @@
     bra = branch -a -vv
     st = status
     who = shortlog -s --
-    email = config --local user.email
+    email = config --local user.email # requires email address as a parameter
     sign = "!f() { git config --local user.signingkey $(gpg --list-secret-keys --keyid-format=long | awk '/^sec|^uid/ { if ($1 == \"sec\") keyAndDate = substr($2, index($2, \"/\")+1) \" [\" $3 \"]\"; if ($1 == \"uid\") print keyAndDate \" \" substr($NF, 2, length($NF)-2) }' | fzf | cut -d\" \" -f1); }; f"
     origin = remote show origin
     fdiff = diff --name-only
