@@ -2,6 +2,11 @@
 # tmux
 ################################################################################
 
+# If we are starting vscode (not the terminal within vscode), don't start tmux
+if [[ ! "$VSCODE_PID" = "" ]]; then
+    exit
+fi
+
 # If the shell is interactive and we are not in a tmux session
 if [[ -o interactive ]]; then
     if [ "$TERM_PROGRAM" != "tmux" ]; then
