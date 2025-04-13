@@ -1,0 +1,18 @@
+- defaults:
+    link:
+      # force: true
+      create: true
+      relink: true
+
+- clean: ["~"]
+
+- link:
+    ~/:
+      glob: true
+      path: ".*"
+      exclude: [README.md, install.conf.yaml, .git, .gitignore, .ssh]
+
+    ~/.ssh/:
+      glob: true
+      create: false
+      path: ".ssh/*"
