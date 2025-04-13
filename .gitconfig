@@ -6,7 +6,7 @@
     pager = cat
 [merge]
     tool = vscode
-	ff = false
+	ff = only ## Only allow ff merges, so after rebase, no commit message needed
 [mergetool "vscode"]
     cmd = code --wait $MERGED
 [diff]
