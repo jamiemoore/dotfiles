@@ -19,9 +19,11 @@
 	helper = osxkeychain
 [push]
     default = simple # use current if you want to automatically create the current branch on the remote
+	autoSetupRemote = true
 [pull]
 	rebase = merges
 [alias]
+    pp = "!f() { git pull && git push ""$@"" 2>&1 | grep -v '^remote:'; }; f"
     graph = log --graph --abbrev-commit --decorate --date=relative --all --pretty=format:'%C(bold yellow)%h%Creset -%C(yellow)%d%Creset %s %C(bold green)(%cr) %C(bold blue)<%an>%Creset'
     gb = log --abbrev-commit --date=relative --pretty=oneline
     co = checkout
@@ -48,6 +50,6 @@
 [pager]
 #	branch = false
 [init]
-	defaultBranch = master
+	defaultBranch = main
 [rebase]
 	autoStash = true
