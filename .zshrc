@@ -31,6 +31,7 @@ sourcey ~/.zsh/curl.zsh
 sourcey ~/.zsh/gpg.zsh
 sourcey ~/.zsh/helpers.zsh
 sourcey ~/.zsh/mise.zsh
+# sourcey ~/.zsh/nvm.zsh
 sourcey ~/.zsh/vault.zsh
 sourcey ~/.zsh/kube.zsh
 sourcey ~/.zsh/colima.zsh
