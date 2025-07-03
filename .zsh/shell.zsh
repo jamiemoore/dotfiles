@@ -11,7 +11,7 @@ autoload -Uz compaudit
 autoload -Uz compinit
 
 #Fix permissions on any shared directories with other users
-compaudit | xargs chmod g-w o-w
+compaudit | xargs -r chmod g-w o-w
 
 # only compile completions if the dump file is missing or older than 24 hours
 if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then

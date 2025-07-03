@@ -33,4 +33,5 @@ docker_safe_start() {
 }
 
 # Set up the alias if we're on macOS
+unset DOCKER_HOST
 [[ "$(uname)" == "Darwin" ]] && alias docker='docker_safe_start && docker'
