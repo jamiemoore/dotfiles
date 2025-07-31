@@ -2,6 +2,9 @@
 # Homebrew
 ################################################################################
 
+# If running on Linux, return early
+[[ "$(uname)" == "Linux" ]] && return
+
 #Set the path only if the directory exists as brew may be in /usr/local/bin
 if [[ -d /opt/homebrew/bin ]]; then
     export PATH="/opt/homebrew/bin:$PATH"
