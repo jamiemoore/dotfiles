@@ -4,15 +4,16 @@
       create: true
       relink: true
 
-- clean: ["~"]
+# - clean: ["~"] # Dangerous when combined with `force: true`
 
 - link:
-    ~/:
-      glob: true
-      path: ".*"
-      exclude: [README.md, install.conf.yaml, .git, .gitignore, .ssh]
+    ~/.zshrc: .zshrc
+    ~/.zsh: .zsh
 
-    ~/.ssh/:
-      glob: true
-      create: false
-      path: ".ssh/*"
+    ~/.ssh/config: .ssh/config
+    ~/.ssh/config.d/example: .ssh/config.d/example
+
+    ~/.vimrc: .vimrc
+    ~/.curlrc: .curlrc
+    ~/.config/tmux/tmux.conf: .config/tmux/tmux.conf
+    ~/.config/ghostty/config: .config/ghostty/config

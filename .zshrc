@@ -18,6 +18,7 @@ function sourcey() {
 }
 
 sourcey ~/.zsh/brew.zsh
+sourcey ~/.zsh/ssh.zsh
 sourcey ~/.zsh/shell.zsh
 sourcey ~/.zsh/pipx.zsh
 sourcey ~/.zsh/aws.zsh

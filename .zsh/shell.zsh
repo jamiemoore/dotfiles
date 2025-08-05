@@ -54,3 +54,5 @@ setopt nonomatch
 unsetopt PROMPT_CR PROMPT_SP
 # Don't display the highlighted % for partial line
 PROMPT_EOL_MARK=
+#Disable bracketed paste mode
+unset zle_bracketed_paste
