@@ -9,3 +9,6 @@ function aws_ec2_ls() {
 
 bindkey -s '^P' 'aws_profiles_ls\n'
 bindkey -s '^O' 'aws_ec2_ls\n'
+
+# AWS completions (add this here)
+complete -C 'aws_completer' aws

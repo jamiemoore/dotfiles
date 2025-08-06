@@ -3,7 +3,7 @@
 ################################################################################
 
 # If running on Linux, return early
-[[ "$(uname)" == "Linux" ]] && return
+[[ "$OSTYPE" == "linux"* ]] && return
 
 #Set the path only if the directory exists as brew may be in /usr/local/bin
 if [[ -d /opt/homebrew/bin ]]; then
@@ -28,3 +28,6 @@ source ~/.cache/brew_shellenv
 export PATH="$HOMEBREW/opt/mysql-client/bin:$PATH"
 
 fpath=($HOMEBREW/share/zsh-completions $fpath)
+
+# curl
+export PATH="$HOMEBREW/opt/curl/bin:$PATH"

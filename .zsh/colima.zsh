@@ -4,11 +4,12 @@
 # If colima is adding lines to your ssh file
 # run colima template and set sshConfig: false
 
+[[ "$OSTYPE" != "darwin"* ]] && return
+unset DOCKER_HOST
+alias docker='docker_safe_start && docker' 
+
 # Docker safe start function for Colima
 docker_safe_start() {
-    # Check if we're on macOS
-    [[ "$(uname)" != "Darwin" ]] && return
-
     # Check if Colima is installed
     whence colima >/dev/null || {
         echo "Error: Colima is not installed. Please install it first:"
@@ -32,6 +33,3 @@ docker_safe_start() {
     return 0
 }
 
-# Set up the alias if we're on macOS
-unset DOCKER_HOST
-[[ "$(uname)" == "Darwin" ]] && alias docker='docker_safe_start && docker'

@@ -15,5 +15,6 @@
 
     ~/.vimrc: .vimrc
     ~/.curlrc: .curlrc
+    ~/.gitconfig: .gitconfig
     ~/.config/tmux/tmux.conf: .config/tmux/tmux.conf
     ~/.config/ghostty/config: .config/ghostty/config

@@ -1,29 +1,10 @@
 ################################################################################
 # shell
 ################################################################################
+typeset -U fpath
 
-# remove duplicates from fpath
-fpath=($(printf "%s\n" "${fpath[@]}" | awk '!seen[$0]++'))
-
-
-# Autocomplete Settings
-autoload -Uz compaudit
-autoload -Uz compinit
-
-#Fix permissions on any shared directories with other users
-compaudit | xargs -r chmod g-w o-w
-
-# only compile completions if the dump file is missing or older than 24 hours
-if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
-    compinit
-else
-    compinit -C
-fi
-
-# Load completions faster
-zstyle ':completion:*' accept-exact '*(N)'
-zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path ~/.zsh/cache
+# Enable vi mode
+bindkey -v
 
 # History
 HISTFILE="$HOME/.zsh_history"
@@ -38,16 +19,6 @@ setopt SHARE_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
 # Don't record an entry starting with a space.
 setopt HIST_IGNORE_SPACE
-
-# Cache fzf shell integration
-if [[ ! -f ~/.cache/fzf.zsh ]] || [[ ! -s ~/.cache/fzf.zsh ]]; then
-    mkdir -p ~/.cache
-    fzf --zsh > ~/.cache/fzf.zsh
-fi
-
-# Fuzzy search history with ctrl-r and fuzzy file open with ctrl-t
-source ~/.cache/fzf.zsh
-
 # Return unmatched glob as glob
 setopt nonomatch
 # Remove % from lines without newline
@@ -56,3 +27,28 @@ unsetopt PROMPT_CR PROMPT_SP
 PROMPT_EOL_MARK=
 #Disable bracketed paste mode
 unset zle_bracketed_paste
+
+# # Reduce key delay (makes mode switching faster)
+# export KEYTIMEOUT=1
+
+# Fix some common keys that break in vi mode
+bindkey '^A' beginning-of-line                    # Ctrl+A to beginning
+bindkey '^E' end-of-line                          # Ctrl+E to end
+# bindkey '^K' kill-line                            # Ctrl+K to kill line
+# bindkey '^U' kill-whole-line                      # Ctrl+U to kill whole line
+# bindkey '^W' backward-kill-word                   # Ctrl+W to kill word
+# bindkey '^Y' yank  
+
+# Load complist for menu selection
+zmodload zsh/complist
+
+# Vim-style navigation in completion menu
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history  
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+
+# Make sure the completions directory exists
+if [ ! -d "$HOME/.local/share/zsh/completions" ]; then
+  mkdir -p "$HOME/.local/share/zsh/completions"
+fi
