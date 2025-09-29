@@ -20,5 +20,9 @@ aws_info() {
     [ $AWS_PROFILE ] && echo " ${AWS_PROFILE}"
 }
 
-PROMPT='%1d%F{green}$(virtualenv_info)%f%F{blue}${vcs_info_msg_0_}%f%F{red}$(proxy_info)%f%F{yellow}$(aws_info)%f %# '
+ns_info() {
+    [ "$NAMESPACE" ] && echo " ${NAMESPACE}"
+}
+
+PROMPT='%1d%F{green}$(virtualenv_info)%f%F{blue}${vcs_info_msg_0_}%f%F{red}$(proxy_info)%f%F{yellow}$(aws_info)%f%F{magenta}$(ns_info)%f %# '
 

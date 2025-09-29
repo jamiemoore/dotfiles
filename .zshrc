@@ -3,6 +3,7 @@
 
 zd=$HOME/.zsh
 
+source "$zd/prompt.zsh"
 source "$zd/shell.zsh"
 source "$zd/plugins.zsh"
 source "$zd/helpers.zsh"
@@ -11,7 +12,6 @@ source "$zd/ssh.zsh"
 source "$zd/aliases.zsh"
 source "$zd/colima.zsh"
 source "$zd/editor.zsh"
-source "$zd/prompt.zsh"
 source "$zd/podman.zsh"
 source "$zd/completions.zsh"
 source "$zd/aws.zsh" # must be after completions.zsh

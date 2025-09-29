@@ -23,3 +23,13 @@
 #     # echo "Word count: $(wc -l < "$cache")"
 #     source "$cache"
 # }
+
+sudons() {
+    local ns="${1:-$NAMESPACE}"
+    if [ -z "$ns" ]; then
+        echo "Error: No namespace specified and NAMESPACE not set"
+        echo "Usage: sudons <namespace> or set NAMESPACE environment variable"
+        return 1
+    fi
+    NAMESPACE="$ns" sudo -E ip netns exec "$ns" zsh
+}
